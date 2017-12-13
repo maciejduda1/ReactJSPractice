@@ -61,12 +61,13 @@ var Counter = React.createClass({
 	 },
 	 shouldComponentUpdate: function(){
 	 	console.log('shouldComponentUpdate użyjemy do sprawdzenia czy dany element powinien być przerenderowany');
+	 	return true;
 	 },
 	 componentWillUpdate: function(){
 	 	console.log('componentWillUpdate można użyć do wykonania z wyprzedzeniem obliczeń przy ponownym renderowaniu elementu (taki pomysł mój :))');
 	 },
 	 componentDidUpdate: function(){
-	 	console.log('componentDidUpdate: Po przerenderowaniu elementu można manipulować drzewem ODM');
+	 	console.log('componentDidUpdate: Po przerenderowaniu elementu można manipulować drzewem DOM');
 	 },
 	 componentWillUnmount: function(){
 	 	console.log('componentWillUnmount użyjemy do zmian w drzewie DOM po usunięciu danego elementu');
@@ -86,11 +87,11 @@ var Counter = React.createClass({
 	 		React.createElement('button', {onClick: this.decrement}, 'Odejmowanie'),
 	 		React.createElement('span', {className: 'nomberCounter'}, 'Licznik ' + this.state.counter),
 	 		React.createElement('button', {onClick: this.increment}, 'Dodawanie'),
-	 		React.createElement(Counter2, {})
 	 	);
 	} 
 });
 
+/*
 var Counter2 = React.createClass({
 	getInitialState: function(){
 		return {
@@ -115,11 +116,15 @@ var Counter2 = React.createClass({
 	 	);
 	}
 });
-
+*/
 
 var element = React.createElement(Counter);
+var element2 = React.createElement(Counter);
+
 
 ReactDOM.render(element, document.getElementById('app'));
+ReactDOM.render(element, document.getElementById('app2'));
+
 document.getElementsByClassName('nomberCounter')[0].style.margin = '20px';
 document.getElementsByClassName('nomberCounter')[1].style.margin = '20px';
 
