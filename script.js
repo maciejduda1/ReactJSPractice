@@ -42,11 +42,17 @@ var element =
 	);
 */
 var Counter = React.createClass({
+	 
+	 propTypes: {
+	 	step: React.PropTypes.number.isRequired,
+	 },
+
 	 getInitialState: function(){
 	 	return {
 	 		counter: 0
 	 	};
 	 },
+	 
 	 getDefaultProps: function(){
 	 	console.log('getDefaultProps użyjemy gdy przy towrzeniu instancji do klasy nie przekażemy wymaganych propsów');
 	 },
@@ -74,12 +80,12 @@ var Counter = React.createClass({
 	 },
 	 increment: function(){
 	 	this.setState({
-	 		counter: this.state.counter + 1
+	 		counter: this.state.counter + this.props.step
 	 	});
 	 },
 	 decrement: function(){
 	 	this.setState({
-	 		counter: this.state.counter - 1
+	 		counter: this.state.counter - this.props.step
 	 	});
 	 },
 	 render: function(){
@@ -90,7 +96,16 @@ var Counter = React.createClass({
 	 	);
 	} 
 });
-
+var CounterList = React.createClass({
+	render: function(){
+		return (
+			React.createElement('div', {},
+				React.createElement(Counter,{step: 5}),
+				React.createElement(Counter,{step: 1}),
+			)		
+		);
+	}
+});
 /*
 var Counter2 = React.createClass({
 	getInitialState: function(){
@@ -118,12 +133,13 @@ var Counter2 = React.createClass({
 });
 */
 
-var element = React.createElement(Counter);
-var element2 = React.createElement(Counter);
+//var element = React.createElement(Counter,{step: 5});
+//var element2 = React.createElement(Counter,{step: 1});
+var counterList = React.createElement(CounterList);
 
-
-ReactDOM.render(element, document.getElementById('app'));
-ReactDOM.render(element, document.getElementById('app2'));
+//ReactDOM.render(element, document.getElementById('app'));
+//ReactDOM.render(element2, document.getElementById('app2'));
+ReactDOM.render(counterList, document.getElementById('app'));
 
 document.getElementsByClassName('nomberCounter')[0].style.margin = '20px';
 document.getElementsByClassName('nomberCounter')[1].style.margin = '20px';
